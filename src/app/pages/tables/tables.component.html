@@ -1,0 +1,53 @@
+<div class="header pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Lista de productos</h3>
+          <div class="float-right">
+            <button type="button" class="btn btn-primary mt-4" routerLink='/register'
+             ><i class="fa fa-plus"></i> Agregar Producto</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">inventario</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products" >
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a href="javascript:void(0)" class="mr-3">
+                      <img alt="Image placeholder" src="../assets/img/brand/shoes.jpeg">
+                    </a>
+                      <span class="mb-0 text-sm">{{product.name}} {{product.descripcion}} </span>
+                  </div>
+                </th>
+                <td>{{product.categoria}}</td>
+                <td>{{product.precio | currency}}</td>
+                <td>{{product.cantidad}}</td>
+                <td>Disponible</td>
+                <td>
+                  <i class="fas fa-marker fa-lg text-info mr-2"></i>
+                  <i class="fas fa-trash-alt fa-lg  text-danger " (click)='delteProdcutFuntion(product.id)'></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
