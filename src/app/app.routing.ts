@@ -4,6 +4,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes =[
@@ -29,6 +30,7 @@ const routes: Routes =[
 
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{

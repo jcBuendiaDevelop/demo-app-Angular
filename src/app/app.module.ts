@@ -14,7 +14,7 @@ import { ComponentsModule } from './components/components.module';
 
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -25,8 +25,8 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 
-    ReactiveFormsModule,
-    FormsModule
+    BrowserModule, 
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
