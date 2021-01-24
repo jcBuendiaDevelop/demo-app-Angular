@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { FormBuilder, FormGroup  } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -9,25 +10,25 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-CreateProduct: FormGroup;
-submitted = false;
-  constructor(private fb: FormBuilder, private firestore: AngularFirestore ) {
-    this.CreateProduct = this.fb.group({
-      nombre: ['sd',Validators.required],
-      descripcion: ['sdd',Validators.required],
-      cantidad: ['5',Validators.required],
-      precio: ['5',Validators.required],
-      categoria: ['sdsdsd',Validators.required]
-    })
-   }
+  productForm = new FormGroup({
+    nombre: new FormControl(''),
+    descripcion: new FormControl(''),
+    categoria: new FormControl(''),
+    precio: new FormControl(''),
+    cantidad: new FormControl('')
+  });
 
-  ngOnInit(): void {
+  constructor(
+    private formBuilder: FormBuilder,  
+    private firestore: AngularFirestore) { }
+
+  ngOnInit() {
   }
 
-  agregarProduct(){
-    const {nombre = 'tenis', descripcion = 'nike de goma',cantidad = 4 ,precio = 200,categoria = 'zapateria'} = this.CreateProduct.value; 
+
+  agregarProduct(item:any){
+    const {nombre, descripcion, cantidad, precio, categoria} = item
     const product: any = {nombre, descripcion,cantidad,precio,categoria}
-    console.log(this.CreateProduct);
     this.addProductFirebase(product).then(() => {
       console.log('producto Agregado')
     }).catch(error => {
@@ -35,7 +36,14 @@ submitted = false;
     })
   }
 
+
   addProductFirebase(product:any): Promise<any>{
     return  this.firestore.collection('products').add(product);
   }
+
+  onSubmit() {
+    console.warn(this.productForm.value);
+    this.agregarProduct(this.productForm.value)
+  }
+  
 }
